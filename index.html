@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Webhook Tutorial</title>
+</head>
+
+<body>
+    <form id="text">
+        <input class="inputSimple" value="" placeholder="Nome e Sobrenome"><br>
+        <input class="inputSimple" value="" placeholder="Horário"><br>
+        <input class="inputSimple" value="" placeholder="Idade"><br>
+        <input class="inputSimple" value="" placeholder="Passaporte"><br>
+        <input class="inputSimple" value="" placeholder="Telefone"><br>
+        <input class="inputSimple" value="" placeholder="Idade"><br>
+
+    </form>
+    <button onclick="sendMessage()">Enviar</button>
+    <input type="reset" form="text" value="Redefinir">
+
+
+
+
+
+</body>
+
+<script>
+    function sendMessage() {
+        var request = new XMLHttpRequest();
+        request.open("POST", "https://discord.com/api/webhooks/815314131330138153/o1DmpIVVqPMnCusMuipR2JzMnUNloLBCpxqIYPVZ3vpih3H42ij5LpXrGhE5nnhJ8yka");
+
+        request.setRequestHeader('Content-type', 'application/json');
+        var x = document.getElementById("text").querySelectorAll(".inputSimple");
+        var str1 = x[0].value;
+        var str2 = x[1].value;
+        var str3 = x[2].value;
+        if (str1 === "") {
+            str1 = "sem nome"
+        } else if (str3 !== Number) {
+            str3 = null
+        }
+        var params = {
+            username: "Agendamento",
+            avatar_url: "https://cdnb.artstation.com/p/assets/images/images/014/861/241/large/jose-miranda-srgb-aang-final-con-brillo-jmt.jpg?1545955204",
+            // content: x.querySelector("input").value
+            content: (str1 + "\n" + str2 + "\n" + str3)
+                //content: document.querySelector("").value,                                                                                                                              
+
+        }
+
+        request.send(JSON.stringify(params));
+        console.log(str1, str2, str3)
+    }
+</script>
+
+</html>

@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="index.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discord Webhook Tutorial</title>
 </head>
@@ -14,9 +15,15 @@
         <input class="inputSimple" value="" placeholder="Idade"><br>
         <input class="inputSimple" value="" placeholder="Passaporte"><br>
         <input class="inputSimple" value="" placeholder="Telefone"><br>
-        <input class="inputSimple" value="" placeholder="Idade"><br>
+        <input class="inputSimple" value="" placeholder="Dia"><br>
+        <input class="inputSimple" value="" placeholder="Tipo de serviço"><br>
 
     </form>
+    <div></div>
+    <!-- <form class="got" method="GET" action="Dia_rtd.php" name="troca" onsubmit="return verifica()">
+        <input type="date" min="2017-01-01" max="2200-12-31" placeholder="Data" name="Data_dd" OnKeyPress="formatar('##/##/####', this)" style="width:170px;" />
+        <button class="css_btn_class" type="submit">Atualizar</button>
+    </form> -->
     <button onclick="sendMessage()">Enviar</button>
     <input type="reset" form="text" value="Redefinir">
 
@@ -33,25 +40,33 @@
 
         request.setRequestHeader('Content-type', 'application/json');
         var x = document.getElementById("text").querySelectorAll(".inputSimple");
-        var str1 = x[0].value;
-        var str2 = x[1].value;
-        var str3 = x[2].value;
-        if (str1 === "") {
-            str1 = "sem nome"
-        } else if (str3 !== Number) {
-            str3 = null
-        }
+
+        var nome = x[0].value;
+        var hora = x[1].value;
+        var idade = x[2].value;
+        var id = x[3].value;
+        var tel = x[4].value;
+        var dia = x[5].value;
+        var tipo = x[6].value;
+
+        // if (str1 === "") {
+        //     str1 = "sem nome"
+        // } else if (str3 !== Number) {
+        //     str3 = null
+        // }
+        var txt = '```prolog\nNome: ' + nome + '\nHorário: ' + hora + '\nIdade: ' + idade + '\nPassaporte: ' + id + '\nTelefone: ' + tel + '\nDia: ' + dia + '\nTipo de serviço: ' + tipo + '```'
         var params = {
             username: "Agendamento",
             avatar_url: "https://cdnb.artstation.com/p/assets/images/images/014/861/241/large/jose-miranda-srgb-aang-final-con-brillo-jmt.jpg?1545955204",
             // content: x.querySelector("input").value
-            content: (str1 + "\n" + str2 + "\n" + str3)
+            //content: (str1 + "\n" + str2 + "\n" + str3)
+            content: String(txt)
                 //content: document.querySelector("").value,                                                                                                                              
 
         }
 
         request.send(JSON.stringify(params));
-        console.log(str1, str2, str3)
+        // console.log(nome, hora, idade)
     }
 </script>
 
